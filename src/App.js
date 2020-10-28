@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import fixedQs from './questions'
 
@@ -10,31 +9,42 @@ export default function App() {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
 	const [score, setScore] = useState(0);
-	const [isCorrect, setColor] = useState(false)
+  const [color, setColor] = useState(undefined)
+  // const selectedAnswer = useRef()
 
 	
 
-	const handleAnswerOptionClick = (answer, correct) => {
-    questions.forEach(q =>
-      console.log(q.id))
+	const handleAnswerOptionClick = (e, answer, correct) => {
+    
+    console.log(answer)
+
+    
 		if (answer === correct) {
-			setScore(score + 1);
-			alert(`CORRECT! way to go!`)
+      setScore(score + 1);
+      e.target.className = 'correct'
+			// alert(`CORRECT! way to go!`)
 		}
 
 		if(answer !== correct){
-			alert(`NOPE, the correct answer was: ${correct}`)
+      // setColor('incorrect')
+      e.target.className = 'incorrect'
+      setTimeout(() => alert(`NOPE, the correct answer was: ${correct}`), 500);
+			
 		}
 
 		
 
 	   const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
-			setCurrentQuestion(nextQuestion);
+      setTimeout(() => setCurrentQuestion(nextQuestion), 2000);
+      setTimeout(() => e.target.className = undefined, 2000);
+      
+      // setColor(undefined)
 		} else {
 			setShowScore(true);
 		}
 	};
+
 
 
 	return (
@@ -42,6 +52,9 @@ export default function App() {
 			{showScore ? (
 				<div className='score-section'>
 					You scored {score} out of {questions.length}
+          <div>
+            <button>Reset</button>
+          </div>
 				</div>
 			) : (
 				<>
@@ -51,9 +64,9 @@ export default function App() {
 						</div>
 						<div className='question-text'>{questions[currentQuestion].question}</div>
 					</div>
-					<div className='answer-section'>
+					<div className='answer-section' >
 						{questions[currentQuestion].incorrect.map((answerOption) => (
-							<button onClick={() => handleAnswerOptionClick(answerOption, questions[currentQuestion].correct)}>{answerOption}</button>
+							<button className={color} onClick={(e) => handleAnswerOptionClick(e, answerOption, questions[currentQuestion].correct)}>{answerOption}</button>
 						))}
 					</div>
 				</>
