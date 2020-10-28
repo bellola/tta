@@ -121,11 +121,11 @@ questions.forEach(elem =>{
 })
 }
 
-let fixedQs = new Set()
+// let fixedQs = new Set()
 
 //fixedQs is a variable containing 10 random questions from questions array
-fixedQs = questions.sort(() => 0.5 - Math.random()).slice(0.5,10)
+let fixedQs = (n=10) => (questions.sort(() => 0.5 - Math.random()).slice(0.5,n))
 
   
-  export default fixedQs
+export default fixedQs
 
