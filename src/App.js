@@ -1,69 +1,63 @@
-import './App.css';
-import React from 'react';
-import fixedQs from './questions';
-import QuestionBox from './components/QuestionsBox'
+
+import React, { useState } from 'react';
+import fixedQs from './questions'
+
+export default function App() {
+
+	//
+	let questions = fixedQs
+
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [showScore, setShowScore] = useState(false);
+	const [score, setScore] = useState(0);
+	const [isCorrect, setColor] = useState(false)
+
+	
+
+	const handleAnswerOptionClick = (answer, correct) => {
+    questions.forEach(q =>
+      console.log(q.id))
+		if (answer === correct) {
+			setScore(score + 1);
+			alert(`CORRECT! way to go!`)
+		}
+
+		if(answer !== correct){
+			alert(`NOPE, the correct answer was: ${correct}`)
+		}
+
+		
+
+	   const nextQuestion = currentQuestion + 1;
+		if (nextQuestion < questions.length) {
+			setCurrentQuestion(nextQuestion);
+		} else {
+			setShowScore(true);
+		}
+	};
 
 
-
-class Welcome extends React.Component {
-  //initialize state with questions and score
- state = {
-    'questionBank':[],
-    'score': 0,
-    'responses': 0
-  }
-  //component method tha calls fixedQs and sets questions to state
-  getQuestions = () => {
-    fixedQs().then(question => {
-      this.setState({
-        questionBank: question
-      })
-    })
-  }
-  //call get questions when component mounts
-  componentDidMount(){
-    this.getQuestions()
-  }
-  //check if answer matches the correct answer
-  computeAnswer(answer, correctAnswer){
-    if(answer === correctAnswer){
-      this.setState({
-        score:this.state.score + 1
-      })
-    }
-    this.setState({
-      responses: this.state.responses + 1
-    })
-    console.log('responses', this.state.responses)
-  }
-
-
-  render() {
-    console.log(this.state)
-    return(
-    
-      <div>
-        {
-        //when only rendering contidionally to make sure we only render questions
-        //when they are in state
-        this.state.questionBank  && 
-        this.state.responses < 10 &&
-        this.state.questionBank.map(({question, correct, incorrect, id})=> 
-
-        (<QuestionBox 
-          question={question} 
-          options={incorrect} 
-          key={id}
-          selected={answer => this.computeAnswer(answer, correct)}/>)
-          
-        
-        )}
-        <h3>{this.state.responses}</h3>
-        
-      </div>
-      
-    ) 
-  }
+	return (
+		<div className='app'>
+			{showScore ? (
+				<div className='score-section'>
+					You scored {score} out of {questions.length}
+				</div>
+			) : (
+				<>
+					<div className='question-section'>
+						<div className='question-count'>
+							<span>Question {currentQuestion + 1}</span>/{questions.length}
+						</div>
+						<div className='question-text'>{questions[currentQuestion].question}</div>
+					</div>
+					<div className='answer-section'>
+						{questions[currentQuestion].incorrect.map((answerOption) => (
+							<button onClick={() => handleAnswerOptionClick(answerOption, questions[currentQuestion].correct)}>{answerOption}</button>
+						))}
+					</div>
+				</>
+			)}
+		</div>
+	);
 }
-
-export default Welcome;
