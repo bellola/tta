@@ -1,4 +1,4 @@
-const questions =[
+const qs =[
   {
     "question": "What was Tandem previous name?",
     "incorrect": ["Tandem", "Burger Shack", "Extraordinary Humans"],
@@ -111,21 +111,21 @@ const questions =[
   }
 ]
 
-//adding correct asnwer to incorrect array to be able to get options easily
-//also adding id so when I map the questions I don't get the "unique key warning"
+
 { let id = 1
-questions.forEach(elem =>{
+qs.forEach(elem =>{
   elem['incorrect'].push(elem.correct)
   elem['id'] = id
   id++
 })
 }
 
-// let fixedQs = new Set()
 
-//fixedQs is a variable containing 10 random questions from questions array
-let fixedQs = (n=10) => (questions.sort(() => 0.5 - Math.random()).slice(0.5,n))
+let qb = (n=10) => Promise.resolve(qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
+// let questions = qs.sort(() => 0.5 - Math.random()).slice(0.5,10)
+// let newQs = (n=10) => qs.sort(() => 0.5 - Math.random()).slice(0.5,n)
+
 
   
-export default fixedQs
+export default qb
 
