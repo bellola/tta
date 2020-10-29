@@ -112,18 +112,15 @@ const qs =[
 ]
 
 
-{ let id = 1
+//added correct answer to incorrect array to be able to later on map all choices from that array
 qs.forEach(elem =>{
   elem['incorrect'].push(elem.correct)
-  elem['id'] = id
-  id++
 })
-}
 
 
+//qb(question bank) is a promise that when resolved provides a set of 10 rnandom questions
 let qb = (n=10) => Promise.resolve(qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
-// let questions = qs.sort(() => 0.5 - Math.random()).slice(0.5,10)
-// let newQs = (n=10) => qs.sort(() => 0.5 - Math.random()).slice(0.5,n)
+
 
 
   
