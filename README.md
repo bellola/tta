@@ -1,4 +1,4 @@
-# How to run :running: the game
+# How to :running: the game
 
 
 To install the packages needed run:
