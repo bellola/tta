@@ -1,4 +1,4 @@
-function Questions({ score, questionBank, resetApp }) {
+function Score({ score, questionBank, resetApp }) {
   return (
     <div className="score-section">
       You scored {score} out of {questionBank.length}
@@ -15,4 +15,4 @@ function Questions({ score, questionBank, resetApp }) {
   );
 }
 
-export default Questions;
+export default Score;

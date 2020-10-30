@@ -9,13 +9,13 @@ class App extends Component {
     currentQuestion: 0,
     showScore: false,
     score: 0,
-    color: undefined,
   };
-
+  //resets everything
   resetApp = () => {
     this.setState({ score: 0 });
     this.setState({ showScore: false });
     this.setState({ currentQuestion: 0 });
+    this.getQuestions();
   };
 
   //this class methods takes the value from the promise and sets it to state
@@ -32,6 +32,7 @@ class App extends Component {
   }
   //gets triggered when an option is picked by the user
   handleAnswerOptionClick = (e, answer, correct) => {
+    console.log(e);
     //if correct the option button turns green to give user feed back and score gets incremented+=1
     if (answer === correct) {
       this.setState({ score: this.state.score + 1 });
@@ -62,7 +63,6 @@ class App extends Component {
           <Questions
             currentQuestion={this.state.currentQuestion}
             questionBank={this.state.questionBank}
-            color={this.state.color}
             handleAnswerOptionClick={this.handleAnswerOptionClick}
           />
         ) : (
