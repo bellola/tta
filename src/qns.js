@@ -120,6 +120,8 @@ qs.forEach(elem =>{
 
 //qb(question bank) is a promise that when resolved provides a set of 10 rnandom questions
 let qb = (n=10) => Promise.resolve(qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
+// let qb = (n=10) => (qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
+
 
 
 

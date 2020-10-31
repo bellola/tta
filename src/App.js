@@ -32,8 +32,8 @@ class App extends Component {
   }
   //gets triggered when an option is picked by the user
   handleAnswerOptionClick = (e, answer, correct) => {
-    console.log(e);
-    //if correct the option button turns green to give user feed back and score gets incremented+=1
+    console.log(answer.key, 'line 35')
+    //if correct the option button turns green to   give user feed back and score gets incremented+=1
     if (answer === correct) {
       this.setState({ score: this.state.score + 1 });
       e.target.className = "correct";
