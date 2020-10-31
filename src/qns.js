@@ -111,20 +111,28 @@ const qs =[
   }
 ]
 
-
 //added correct answer to incorrect array to be able to later on map all choices from that array
-qs.forEach(elem =>{
-  elem['incorrect'].push(elem.correct)
+qs.forEach(q =>{
+  q['incorrect'].push(q.correct)
 })
 
+
+//add id to every answer option
+qs.forEach(q=>{
+  let id = 0
+  q.incorrect.forEach(alt => {
+    let idx = q.incorrect.indexOf(alt);
+    if(idx !== -1){
+      q.incorrect[idx] = {alt, id}
+      id++
+    }
+  })
+  id = 0
+})
 
 //qb(question bank) is a promise that when resolved provides a set of 10 rnandom questions
 let qb = (n=10) => Promise.resolve(qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
 // let qb = (n=10) => (qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
-
-
-
-
   
 export default qb
 

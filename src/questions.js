@@ -15,15 +15,17 @@ function Questions({ questionBank, currentQuestion, handleAnswerOptionClick }) {
           .map((answerOption) => (
             <button
               className={undefined}
+              // key={answerOption.id}
+              id={answerOption.id}
               onClick={(e) =>
                 handleAnswerOptionClick(
                   e,
-                  answerOption,
+                  answerOption.alt,
                   questionBank[currentQuestion].correct
                 )
               }
             >
-              {answerOption}
+              {answerOption.alt}
             </button>
           ))}
       </div>
