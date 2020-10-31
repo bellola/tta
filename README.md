@@ -4,11 +4,17 @@ To install the packages needed run:
 ```
 npm install
 ```
-And then to get started run:
+To get started run:
 
 ```
 npm start
 ```
+To run tests:
+
+```
+npm test
+```
+
 
 # Additional features :dizzy:
 

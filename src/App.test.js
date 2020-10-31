@@ -7,7 +7,7 @@ function checkIfArrayIsUnique(myArray) {
 }
 
 //TEST CASES//
-test('renders learn react link', () => {
+test('renders score', () => {
   render(<App />);
   const linkElement = screen.getByText(/score/i);
   expect(linkElement).toBeInTheDocument();
