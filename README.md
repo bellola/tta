@@ -32,4 +32,5 @@ Sadly I found out about this opportunity pretty late so I only worked on it for 
 
 - If you click the options fast enough the button color cannot keep up. I would like to refine timeouts and methods that control the flow of the application (next question and correct and incorrect answer feedback).
 - If I add 'key' prop to the answer options the green or red color stops showing when a user selects an answer.
+-The question timer was a last minute feature so the timer is behavior may be a little unpredictable.
 
