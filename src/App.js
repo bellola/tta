@@ -71,7 +71,7 @@ class App extends Component {
   //here we call getQuestions when the component is first rendering
   componentDidMount() {
     this.getQuestions();
-    // this.startTimer();
+    this.startTimer();
   }
 
   //gets triggered when an option is picked by the user
