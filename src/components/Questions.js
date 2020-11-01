@@ -26,7 +26,7 @@ function Questions({
                 e,
                 answerOption.alt,
                 questionBank[currentQuestion].correct,
-                questionBank[currentQuestion].incorrect
+              
               )
             }
           >

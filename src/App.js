@@ -33,7 +33,7 @@ class App extends Component {
     this.setState({
       time: 0,
     });
-    const countdownTime = Date.now() + 22000;
+    const countdownTime = Date.now() + 10000;
     const nextQuestion = this.state.currentQuestion + 1;
     this.interval = setInterval(() => {
       const now = new Date();
@@ -44,12 +44,13 @@ class App extends Component {
         this.setState({
           time: 0,
         });
-
+        
         if (nextQuestion < this.state.questionBank.length) {
           this.setState({ currentQuestion: nextQuestion });
           this.startTimer();
         } else {
           this.setState({ showScore: true });
+          clearInterval(this.interval)
         }
       } else {
         this.setState({
@@ -71,14 +72,16 @@ class App extends Component {
   //here we call getQuestions when the component is first rendering
   componentDidMount() {
     this.getQuestions();
-    this.startTimer();
+    // this.startTimer();
   }
 
   //gets triggered when an option is picked by the user
-  handleAnswerOptionClick = (e, answer, correct, options) => {
-    console.log(this.state.questionBank);
+  handleAnswerOptionClick = (e, answer, correct) => {
+    this.startTimer();
+    const nextQuestion = this.state.currentQuestion + 1;
+
     //if correct the option button turns green to   give user feed back and score gets incremented+=1
-    if (answer === correct) {
+    if (answer === correct ) {
       this.setState({ score: this.state.score + 1 });
       e.target.className = "correct";
       setTimeout(() => (e.target.className = undefined), 500);
@@ -90,13 +93,13 @@ class App extends Component {
       setTimeout(() => (e.target.className = undefined), 650);
     }
     //if the question index is less than the number of questions we move to next question otherwise we show score
-    const nextQuestion = this.state.currentQuestion + 1;
+   
+
     if (nextQuestion < this.state.questionBank.length) {
       this.setState({ currentQuestion: nextQuestion });
-
-      this.startTimer();
     } else {
       this.setState({ showScore: true });
+      clearInterval(this.interval)
     }
   };
 
