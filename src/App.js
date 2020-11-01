@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import qb from "./qns";
 import Questions from "./components/Questions";
 import Score from "./components/Score";
-import logo from './assets/logo.png'
+import logo from "./assets/logo.png";
 
 class App extends Component {
   constructor() {
@@ -27,6 +27,7 @@ class App extends Component {
     this.startTimer();
   };
 
+  //handles interval for the countdown timer in each question
   startTimer = () => {
     clearInterval(this.interval);
     this.setState({
@@ -104,25 +105,25 @@ class App extends Component {
     return (
       <div>
         <div className="parent-div">
-          <img src={logo} alt='tandem-trivia' className='img' />
+          <img src={logo} alt="tandem-trivia" className="img" />
         </div>
-      <div className="app">
-        {this.state.questionBank.length > 0 &&
-        this.state.showScore === false ? (
-          <Questions
-            currentQuestion={this.state.currentQuestion}
-            questionBank={this.state.questionBank}
-            handleAnswerOptionClick={this.handleAnswerOptionClick}
-            time={this.state.time}
-          />
-        ) : (
-          <Score
-            score={this.state.score}
-            questionBank={this.state.questionBank}
-            resetApp={this.resetApp}
-          />
-        )}
-      </div>
+        <div className="app">
+          {this.state.questionBank.length > 0 &&
+          this.state.showScore === false ? (
+            <Questions
+              currentQuestion={this.state.currentQuestion}
+              questionBank={this.state.questionBank}
+              handleAnswerOptionClick={this.handleAnswerOptionClick}
+              time={this.state.time}
+            />
+          ) : (
+            <Score
+              score={this.state.score}
+              questionBank={this.state.questionBank}
+              resetApp={this.resetApp}
+            />
+          )}
+        </div>
       </div>
     );
   }
