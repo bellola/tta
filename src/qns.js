@@ -111,10 +111,15 @@ const qs =[
   }
 ]
 
-//added correct answer to incorrect array to be able to later on map all choices from that array
+//added correct answer to incorrect array to be able to later on map all choices from that array and
+//randomize options in array so they won't be at last index everytime
 qs.forEach(q =>{
   q['incorrect'].push(q.correct)
+  q.incorrect.sort(()=>0.5 - Math.random())
 })
+
+
+
 
 
 //add id to every answer option
@@ -132,7 +137,7 @@ qs.forEach(q=>{
 
 //qb(question bank) is a promise that when resolved provides a set of 10 rnandom questions
 let qb = (n=10) => Promise.resolve(qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
-// let qb = (n=10) => (qs.sort(() => 0.5 - Math.random()).slice(0.5,n))
+
   
 export default qb
 

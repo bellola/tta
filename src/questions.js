@@ -1,4 +1,4 @@
-function Questions({ questionBank, currentQuestion, handleAnswerOptionClick }) {
+function Questions({ questionBank, currentQuestion, time, handleAnswerOptionClick }) {
   return (
     <>
       <div className="question-section">
@@ -8,10 +8,12 @@ function Questions({ questionBank, currentQuestion, handleAnswerOptionClick }) {
         <div className="question-text">
           {questionBank[currentQuestion].question}
         </div>
+        <div className="question-text">
+         Time left: {time}
+        </div>
       </div>
       <div className="answer-section">
         {questionBank[currentQuestion].incorrect
-          .sort(() => Math.random() - 0.5)
           .map((answerOption) => (
             <button
               className={undefined}
@@ -21,7 +23,8 @@ function Questions({ questionBank, currentQuestion, handleAnswerOptionClick }) {
                 handleAnswerOptionClick(
                   e,
                   answerOption.alt,
-                  questionBank[currentQuestion].correct
+                  questionBank[currentQuestion].correct,
+                  questionBank[currentQuestion].incorrect
                 )
               }
             >

@@ -4,11 +4,17 @@ import Questions from "./Questions";
 import Score from "./Score";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.interval = null;
+  }
+
   state = {
     questionBank: [],
     currentQuestion: 0,
     showScore: false,
     score: 0,
+    time: null,
   };
   //resets everything
   resetApp = () => {
@@ -16,6 +22,39 @@ class App extends Component {
     this.setState({ showScore: false });
     this.setState({ currentQuestion: 0 });
     this.getQuestions();
+    clearInterval(this.interval);
+    this.startTimer();
+  };
+
+  startTimer = () => {
+    clearInterval(this.interval);
+    this.setState({
+      time: 0,
+    });
+    const countdownTime = Date.now() + 22000;
+    const nextQuestion = this.state.currentQuestion + 1;
+    this.interval = setInterval(() => {
+      const now = new Date();
+      const distance = countdownTime - now;
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      if (distance < 0) {
+        clearInterval(this.interval);
+        this.setState({
+          time: 0,
+        });
+
+        if (nextQuestion < this.state.questionBank.length) {
+          this.setState({ currentQuestion: nextQuestion });
+          this.startTimer();
+        } else {
+          this.setState({ showScore: true });
+        }
+      } else {
+        this.setState({
+          time: seconds,
+        });
+      }
+    }, 1000);
   };
 
   //this class methods takes the value from the promise and sets it to state
@@ -26,13 +65,16 @@ class App extends Component {
       });
     });
   };
+
   //here we call getQuestions when the component is first rendering
   componentDidMount() {
     this.getQuestions();
+    this.startTimer();
   }
+
   //gets triggered when an option is picked by the user
-  handleAnswerOptionClick = (e, answer, correct) => {
-    
+  handleAnswerOptionClick = (e, answer, correct, options) => {
+    console.log(this.state.questionBank);
     //if correct the option button turns green to   give user feed back and score gets incremented+=1
     if (answer === correct) {
       this.setState({ score: this.state.score + 1 });
@@ -49,6 +91,8 @@ class App extends Component {
     const nextQuestion = this.state.currentQuestion + 1;
     if (nextQuestion < this.state.questionBank.length) {
       this.setState({ currentQuestion: nextQuestion });
+
+      this.startTimer();
     } else {
       this.setState({ showScore: true });
     }
@@ -64,6 +108,7 @@ class App extends Component {
             currentQuestion={this.state.currentQuestion}
             questionBank={this.state.questionBank}
             handleAnswerOptionClick={this.handleAnswerOptionClick}
+            time={this.state.time}
           />
         ) : (
           <Score
