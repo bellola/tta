@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import qb from "./qns";
-import Questions from "./Questions";
-import Score from "./Score";
+import Questions from "./components/Questions";
+import Score from "./components/Score";
+import logo from './assets/logo.png'
 
 class App extends Component {
   constructor() {
@@ -69,7 +70,7 @@ class App extends Component {
   //here we call getQuestions when the component is first rendering
   componentDidMount() {
     this.getQuestions();
-    this.startTimer();
+    // this.startTimer();
   }
 
   //gets triggered when an option is picked by the user
@@ -101,6 +102,10 @@ class App extends Component {
   //we conditionaly render depending on state
   render() {
     return (
+      <div>
+        <div className="parent-div">
+          <img src={logo} alt='tandem-trivia' className='img' />
+        </div>
       <div className="app">
         {this.state.questionBank.length > 0 &&
         this.state.showScore === false ? (
@@ -117,6 +122,7 @@ class App extends Component {
             resetApp={this.resetApp}
           />
         )}
+      </div>
       </div>
     );
   }

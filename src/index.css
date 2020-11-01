@@ -12,6 +12,7 @@ body {
   color: #ffffff;
 }
 
+
 body {
   background-color: #FFF4E5;
   display: flex;
@@ -20,15 +21,35 @@ body {
   min-height: 100vh;
 }
 
+.img-parent {
+  width: 500px;
+  min-height: 100px;
+  height: 100px;
+  border-radius: 15px;
+  padding: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+}
+
+.img {
+
+  
+  width: 600px;
+  
+}
+
+
 .app {
   background-color: #252d4a;
-  width: 450px;
-  min-height: 200px;
+  width: 500px;
+  min-height: 250px;
   height: min-content;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
   display: flex;
+  margin-top: 0;
   justify-content: space-evenly;
 }
 
@@ -36,6 +57,7 @@ body {
   display: flex;
   font-size: 24px;
   align-items: center;
+  padding: 3px;
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
@@ -45,11 +67,11 @@ body {
 }
 
 .question-count {
-  margin-bottom: 20px;
+  margin-bottom: 21px;
 }
 
 .question-count span {
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .question-text {
@@ -76,15 +98,15 @@ body {
 
 button {
   width: 100%;
-  font-size: 16px;
+  font-size: 18px;
   color: #ffffff;
   background-color: #252d4a;
   border-radius: 15px;
   display: flex;
-  padding: 5px;
+  padding: 4px;
   justify-content: flex-start;
   align-items: center;
-  border: 5px solid #234668;
+  border: 6px solid #234668;
   cursor: pointer;
 }
 
